@@ -375,17 +375,33 @@ button:hover{
 
 <h2>Admin Panel</h2>
 
-<select id="playlist">
+<select id="playlist" onchange="changePlaylist()">
 <option value="1v1">1v1</option>
 <option value="2v2">2v2</option>
 <option value="3v3">3v3</option>
-<option value="3v3">Wins</option>
+<option value="wins">Wins</option>
 </select>
 
 <input type="text" id="playerName" placeholder="Player Name">
 
-<input type="number" id="playerMMR" placeholder="MMR">
+<div id="mmrFields">
+  <input type="number" id="playerMMR" placeholder="MMR">
+</div>
 
+  <div id="winsFields" style="display:none;">
+  <input
+    type="number"
+    id="playerWins"
+    placeholder="Wins"
+  >
+  <input
+    type="number"
+    id="playerMatches"
+    placeholder="Matches"
+  >
+</div>
+
+  
 <input type="text" id="playerFlag" placeholder="Flag Image URL">
 
 <input type="text" id="playerIcons" placeholder="Icon URLs separated by commas">
@@ -549,6 +565,25 @@ window.login = async function(){
 window.logout = async function(){
 
   await signOut(auth);
+
+}
+
+  window.changePlaylist = function(){
+
+  const playlist =
+    document.getElementById("playlist").value;
+
+  if(playlist == "wins"){
+
+    document.getElementById("mmrFields").style.display = "none";
+    document.getElementById("winsFields").style.display = "block";
+
+  }else{
+
+    document.getElementById("mmrFields").style.display = "block";
+    document.getElementById("winsFields").style.display = "none";
+
+  }
 
 }
 
