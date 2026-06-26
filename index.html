@@ -455,8 +455,15 @@ button:hover{
 
 <input type="text" id="editName" placeholder="Player Name">
 
-<input type="number" id="editMMR" placeholder="MMR">
+<div id="editMMRFields">
+  <input type="number" id="editMMR" placeholder="MMR">
+</div>
 
+<div id="editWinsFields" style="display:none;">
+  <input type="number" id="editWins" placeholder="Wins">
+  <input type="number" id="editMatches" placeholder="Matches">
+</div>
+  
 <input type="text" id="editFlag" placeholder="Flag Image URL">
 
 <input type="text" id="editIcons" placeholder="Icon URLs separated by commas">
@@ -771,6 +778,9 @@ window.openEdit = function(
   id,
   name,
   mmr,
+  wins,
+  matches,
+  playlist,
   flag,
   icons,
   glowColor,
@@ -782,11 +792,24 @@ window.openEdit = function(
 
   editingPlayerId = id;
 
+  if(playlist == "wins"){
+
+  document.getElementById("editMMRFields").style.display = "none";
+  document.getElementById("editWinsFields").style.display = "block";
+
+  document.getElementById("editWins").value = wins || 0;
+  document.getElementById("editMatches").value = matches || 0;
+
+}else{
+
+  document.getElementById("editMMRFields").style.display = "block";
+  document.getElementById("editWinsFields").style.display = "none";
+
+}
+
   document.getElementById("editBox").style.display = "block";
 
   document.getElementById("editName").value = name;
-
-  document.getElementById("editMMR").value = mmr;
 
   document.getElementById("editFlag").value = flag || "";
   
@@ -829,18 +852,38 @@ window.saveEdit = async function(){
   const iconSize =
     Number(document.getElementById("editIconSize").value) || 18;
 
-  await updateDoc(doc(db,"leaderboard",editingPlayerId),{
-    name,
-    mmr,
-    flag,
-    icons,
-    glowColor,
-    glowStrength,
-    iconSize
-});
+  const wins =
+  Number(document.getElementById("editWins").value);
 
-  document.getElementById("editBox").style.display = "none";
+const matches =
+  Number(document.getElementById("editMatches").value);
 
+const data = {
+  name,
+  flag,
+  icons,
+  glowColor,
+  glowStrength,
+  iconSize
+};
+
+if(document.getElementById("editWinsFields").style.display == "block"){
+
+  data.wins = wins;
+  data.matches = matches;
+
+}else{
+
+  data.mmr = mmr;
+
+}
+
+await updateDoc(
+  doc(db,"leaderboard",editingPlayerId),
+  data
+);
+
+document.getElementById("editBox").style.display = "none";
 }
 
 onSnapshot(leaderboardRef,(snap)=>{
@@ -954,15 +997,18 @@ if(mode == "wins"){
         <button
           class="action-btn"
           onclick="openEdit(
-            '${player.id}',
-            '${player.name}',
-            0,
-            '${player.flag || ""}',
-            '${player.icons || ""}',
-            '${player.glowColor || "#ffffff"}',
-            ${player.glowStrength || 0},
-            ${player.iconSize || 18}
-          )"
+          '${player.id}',
+          '${player.name}',
+          0,
+          ${player.wins},
+          ${player.matches},
+          'wins',
+          '${player.flag || ""}',
+          '${player.icons || ""}',
+          '${player.glowColor || "#ffffff"}',
+          ${player.glowStrength || 0},
+          ${player.iconSize || 18}
+        )"
         >
           Edit
         </button>
@@ -1024,6 +1070,9 @@ else{
             '${player.id}',
             '${player.name}',
             ${player.mmr},
+            0,
+            0,
+            '${player.playlist}',
             '${player.flag || ""}',
             '${player.icons || ""}',
             '${player.glowColor || "#ffffff"}',
