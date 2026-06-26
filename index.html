@@ -109,6 +109,10 @@ body{
   border-radius:4px;
 }
 
+  .table-wrapper{
+    overflow-x:auto;
+}
+
 .container{
   max-width:470px;
   margin:auto;
@@ -350,27 +354,28 @@ button:hover{
 
 <!-- Wins -->
 <div id="wins" class="board">
-<div class="table-box">
-<h2>Wins</h2>
+  <div class="table-box">
+    <h2>Wins</h2>
 
-<table class="table">
-<thead>
-<tr>
-<th>Rank</th>
-<th>Player</th>
-<th>Wins</th>
-<th>Matches</th>
-<th>Win%</th>
-<th class="actions-header" style="display:none;">Actions</th>
-</tr>
-</thead>
+    <!-- WRAPPER ADDED -->
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Wins</th>
+            <th>Matches</th>
+            <th>Win%</th>
+            <th class="actions-header" style="display:none;">Actions</th>
+          </tr>
+        </thead>
 
-<tbody id="boardwins"></tbody>
+        <tbody id="boardwins"></tbody>
 
-</table>
-</div>
-</div>
-
+      </table>
+    </div>
+    
 <!-- ADMIN PANEL -->
 <div class="admin-box" id="adminBox">
 
