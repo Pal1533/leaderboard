@@ -367,7 +367,7 @@ button:hover{
             <th>Rank</th>
             <th>Player</th>
             <th>Wins</th>
-            <th>Matches   </th>
+            <th>Matches</th>
             <th>Win%</th>
             <th class="actions-header" style="display:none;">Actions</th>
           </tr>
@@ -997,11 +997,11 @@ if(mode == "wins"){
         ${displayName}
       </td>
 
-      <td>${player.wins || 0}</td>
+<td class="${rankClass}">${player.wins || 0}</td>
 
-      <td>${player.matches || 0}</td>
+<td class="${rankClass}">${player.matches || 0}</td>
 
-      <td>${winRate}%</td>
+<td class="${rankClass}">${winRate}%</td>
 
       <td>
 
