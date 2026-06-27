@@ -76,8 +76,17 @@ body{
   border-radius:4px;
 }
 
+.playerDisplay{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  white-space:nowrap;
+}
+
 .playerName{
   display:inline-block;
+  white-space:nowrap;
 }
 
 .icon-key{
@@ -548,7 +557,6 @@ const iconKeyRef = collection(db,"iconKey");
 
 /* PUT YOUR EMAILS HERE */
 const adminEmails = [
-  "c.emotimi@gmail.com",
   "underflagfg@gmail.com"
 ];
 
@@ -947,27 +955,29 @@ onSnapshot(leaderboardRef,(snap)=>{
               .join("")
           : "";
       
-      const displayName = `
-      
-        ${player.flag
-          ? `<img class="flagIcon" src="${player.flag}" alt="">`
-          : ""
-        }
-      
-        <span
-          class="playerName"
-          style="
-            ${player.glowStrength > 0
-            ? `text-shadow: 0 0 ${player.glowStrength}px ${player.glowColor || "#ffffff"};`
-            : ""
-  }
-"
-        >
-          ${player.name}
-        </span>
-      
-        ${iconHTML}
+ const displayName = `
+<div class="playerDisplay">
 
+  ${
+    player.flag
+      ? `<img class="flagIcon" src="${player.flag}" alt="">`
+      : ""
+  }
+
+  <span
+    class="playerName"
+    style="${
+      player.glowStrength > 0
+        ? `text-shadow: 0 0 ${player.glowStrength}px ${player.glowColor || "#ffffff"};`
+        : ""
+    }"
+  >
+    ${player.name}
+  </span>
+
+  ${iconHTML}
+
+</div>
 `;
 
 const winRate =
