@@ -123,14 +123,6 @@ body{
   padding-top:40px;
 }
 
-  .table-wrapper{
-    overflow-x:auto;
-}
-
-.wins-table{
-    min-width:560px;
-}
-
 h1{
   text-align:center;
   color:#ffffff;
@@ -371,11 +363,11 @@ button:hover{
 </div>
 
 <!-- Wins -->
- <div class="table-box">
+<div id="wins" class="board">
+  <div class="table-box">
     <h2>Wins</h2>
 
-    <div class="table-wrapper">
-      <table class="table wins-table">
+      <table class="table">
         <thead>
           <tr>
             <th>Rank</th>
@@ -388,10 +380,11 @@ button:hover{
         </thead>
 
         <tbody id="boardwins"></tbody>
+
       </table>
     </div>
-  </div>
-</div>
+    </div>
+    
     
 <!-- ADMIN PANEL -->
 <div class="admin-box" id="adminBox">
