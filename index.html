@@ -935,10 +935,22 @@ onSnapshot(leaderboardRef,(snap)=>{
 
     boards[mode].forEach((player,index)=>{
 
-      let rankClass =
-        index===0 ? "top1" :
-        index===1 ? "top2" :
-        index===2 ? "top3" : "";
+     let rankClass =
+  index === 0 ? "top1" :
+  index === 1 ? "top2" :
+  index === 2 ? "top3" : "";
+
+let rankGlow = "";
+
+if (index === 0) {
+  rankGlow = "text-shadow:0 0 10px gold;";
+}
+else if (index === 1) {
+  rankGlow = "text-shadow:0 0 10px silver;";
+}
+else if (index === 2) {
+  rankGlow = "text-shadow:0 0 10px #cd7f32;";
+}
 
       const iconHTML =
         player.icons
@@ -965,11 +977,7 @@ onSnapshot(leaderboardRef,(snap)=>{
 
   <span
     class="playerName"
-    style="${
-      player.glowStrength > 0
-        ? `text-shadow: 0 0 ${player.glowStrength}px ${player.glowColor || "#ffffff"};`
-        : ""
-    }"
+    style="${rankGlow}"
   >
     ${player.name}
   </span>
@@ -997,11 +1005,17 @@ if(mode == "wins"){
         ${displayName}
       </td>
 
-<td class="${rankClass}">${player.wins || 0}</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.wins || 0}
+</td>
 
-<td class="${rankClass}">${player.matches || 0}</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.matches || 0}
+</td>
 
-<td class="${rankClass}">${winRate}%</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${winRate}%
+</td>
 
       <td>
 
@@ -1046,11 +1060,17 @@ if(mode == "wins"){
         ${displayName}
       </td>
 
-<td class="${rankClass}">${player.wins || 0}</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.wins || 0}
+</td>
 
-<td class="${rankClass}">${player.matches || 0}</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.matches || 0}
+</td>
 
-<td class="${rankClass}">${winRate}%</td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${winRate}%
+</td>
 
     </tr>`;
   }
@@ -1071,8 +1091,9 @@ else{
         ${displayName}
       </td>
 
-<td class="${rankClass}">${player.mmr}</td>
-      <td>
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.mmr}
+</td>      <td>
 
         <button
           class="action-btn"
@@ -1117,8 +1138,9 @@ else{
         ${displayName}
       </td>
 
-<td class="${rankClass}">${player.mmr}</td>
-
+<td class="${rankClass}" style="${rankGlow}">
+    ${player.mmr}
+</td>
     </tr>`;
   }
 
