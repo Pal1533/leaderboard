@@ -123,6 +123,13 @@ body{
   padding-top:40px;
 }
 
+  .wins-box{
+  width:calc(100vw - 20px);
+  max-width:650px;
+  margin-left:50%;
+  transform:translateX(-50%);
+}
+
 h1{
   text-align:center;
   color:#ffffff;
@@ -364,27 +371,30 @@ button:hover{
 
 <!-- Wins -->
 <div id="wins" class="board">
-  <div class="table-box">
+
+  <div class="table-box wins-box">
+
     <h2>Wins</h2>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Wins</th>
-            <th>Matches</th>
-            <th>Win%</th>
-            <th class="actions-header" style="display:none;">Actions</th>
-          </tr>
-        </thead>
+    <table class="table wins-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Wins</th>
+          <th>Matches</th>
+          <th>Win%</th>
+          <th class="actions-header" style="display:none;">Actions</th>
+        </tr>
+      </thead>
 
-        <tbody id="boardwins"></tbody>
+      <tbody id="boardwins"></tbody>
 
-      </table>
-    </div>
-    </div>
-    
+    </table>
+
+  </div>
+
+</div>
     
 <!-- ADMIN PANEL -->
 <div class="admin-box" id="adminBox">
